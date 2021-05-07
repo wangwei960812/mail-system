@@ -20,4 +20,6 @@ public interface WeChatMessageType {
 
     String NEWS = "news";
 
+    String EVENT = "event";
+
 }

@@ -6,6 +6,11 @@ spring:
     username: 15216619538@163.com
     password: 125263ww
     default-encoding: UTF-8
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/spring_cloud?serverTimezone=GMT%2B8&useUnicode=true&characterEncodeing=utf-8&useSSL=false
+      username: root
+      password: root
 
 logging:
   level:
@@ -17,3 +22,4 @@ server:
 wechat:
   token: 960812ww
   encodingAESKey: TDmCawn758p7Y2vo7JfbERphchNo4RCiCDUhksBL29z
+  assessTokenIp:  https://api.weixin.qq.com/cgi-bin/token

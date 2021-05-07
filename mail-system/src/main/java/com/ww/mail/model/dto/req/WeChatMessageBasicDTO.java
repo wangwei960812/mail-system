@@ -14,15 +14,7 @@ import javax.xml.bind.annotation.XmlElement;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WeChatMessageBasicDTO {
-    @XmlElement(name = "ToUserName")
-    private String ToUserName;
-    @XmlElement(name = "FromUserName")
-    private String FromUserName;
-    @XmlElement(name = "CreateTime")
-    private String CreateTime;
-    @XmlElement(name = "MsgType")
-    private String MsgType;
+public class WeChatMessageBasicDTO extends WeChatBasicDTO{
     @XmlElement(name = "MsgId")
     private String MsgId;
 }

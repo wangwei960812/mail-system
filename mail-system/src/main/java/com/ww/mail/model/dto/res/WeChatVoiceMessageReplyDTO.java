@@ -1,5 +1,7 @@
 package com.ww.mail.model.dto.res;
 
+import com.ww.mail.constant.WeChatMessageType;
+import com.ww.mail.model.dto.req.WeChatBasicDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,11 +18,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WeChatVoiceMessageReplyDTO extends WeChatMessageBasicReplyDTO{
     @XmlElement(name = "MediaId")
     private String MediaId;
 
+    public WeChatVoiceMessageReplyDTO(WeChatBasicDTO weChatBasicDTO) {
+        super(weChatBasicDTO);
+        super.setMsgType(WeChatMessageType.VOICE);
+    }
+
+    public WeChatVoiceMessageReplyDTO() {
+        super.setMsgType(WeChatMessageType.VOICE);
+    }
 }

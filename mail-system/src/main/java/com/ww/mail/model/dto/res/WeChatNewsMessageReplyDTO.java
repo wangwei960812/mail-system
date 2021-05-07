@@ -1,5 +1,7 @@
 package com.ww.mail.model.dto.res;
 
+import com.ww.mail.constant.WeChatMessageType;
+import com.ww.mail.model.dto.req.WeChatBasicDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +19,6 @@ import java.util.List;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WeChatNewsMessageReplyDTO extends WeChatMessageBasicReplyDTO{
@@ -25,4 +26,13 @@ public class WeChatNewsMessageReplyDTO extends WeChatMessageBasicReplyDTO{
     private String ArticleCount;
     @XmlElement(name = "Articles")
     private List<ArticleDTO> Articles;
+
+    public WeChatNewsMessageReplyDTO(WeChatBasicDTO weChatBasicDTO) {
+        super(weChatBasicDTO);
+        super.setMsgType(WeChatMessageType.NEWS);
+    }
+
+    public WeChatNewsMessageReplyDTO() {
+        super.setMsgType(WeChatMessageType.NEWS);
+    }
 }

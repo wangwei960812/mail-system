@@ -1,5 +1,6 @@
 package com.ww.mail.model.dto.res;
 
+import com.ww.mail.constant.WeChatMessageType;
 import com.ww.mail.model.dto.req.WeChatMessageBasicDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,5 +27,6 @@ public class WeChatImageMessageReplyDTO extends WeChatMessageBasicReplyDTO {
 
     public WeChatImageMessageReplyDTO(WeChatMessageBasicDTO weChatMessageBasicDTO) {
         super(weChatMessageBasicDTO);
+        super.setMsgType(WeChatMessageType.IMAGE);
     }
 }

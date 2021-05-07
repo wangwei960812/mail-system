@@ -6,6 +6,8 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
+
 
 /**
  * @author ：黑洞里的光
@@ -15,18 +17,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FilterConfig {
 
-    @Value("${wechat.token}")
-    private String token;
-
-    @Value("${wechat.encodingAESKey}")
-    private String encodingAESKey;
+    @Resource
+    private WeChatProperties weChatProperties;
 
     @Bean
     public FilterRegistrationBean registFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         WeChatSignatureVerificationFilter weChatSignatureVerificationFilter = new WeChatSignatureVerificationFilter();
-        weChatSignatureVerificationFilter.setToken(token);
-        weChatSignatureVerificationFilter.setEncodingAESKey(encodingAESKey);
+        weChatSignatureVerificationFilter.setToken(weChatProperties.getToken());
+        weChatSignatureVerificationFilter.setEncodingAESKey(weChatProperties.getEncodingAESKey());
         registration.setFilter(weChatSignatureVerificationFilter);
         registration.addUrlPatterns("/*");
         registration.setName("weChatSignatureVerificationFilter");

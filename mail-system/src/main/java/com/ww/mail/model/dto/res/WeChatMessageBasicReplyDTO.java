@@ -1,6 +1,6 @@
 package com.ww.mail.model.dto.res;
 
-import com.ww.mail.model.dto.req.WeChatMessageBasicDTO;
+import com.ww.mail.model.dto.req.WeChatBasicDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,10 +28,9 @@ public class WeChatMessageBasicReplyDTO {
     @XmlElement(name = "MsgType")
     private String MsgType;
 
-    public WeChatMessageBasicReplyDTO(WeChatMessageBasicDTO weChatMessageBasicDTO) {
-        this.FromUserName = weChatMessageBasicDTO.getToUserName();
-        this.ToUserName = weChatMessageBasicDTO.getFromUserName();
-        this.MsgType = weChatMessageBasicDTO.getMsgType();
+    public WeChatMessageBasicReplyDTO(WeChatBasicDTO weChatBasicDTO) {
+        this.FromUserName = weChatBasicDTO.getToUserName();
+        this.ToUserName = weChatBasicDTO.getFromUserName();
     }
 
 }

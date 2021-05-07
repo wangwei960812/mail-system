@@ -1,5 +1,7 @@
 package com.ww.mail.model.dto.res;
 
+import com.ww.mail.constant.WeChatMessageType;
+import com.ww.mail.model.dto.req.WeChatBasicDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WeChatVideoMessageReplyDTO extends WeChatMessageBasicReplyDTO{
@@ -26,4 +27,13 @@ public class WeChatVideoMessageReplyDTO extends WeChatMessageBasicReplyDTO{
     private String Title;
     @XmlElement(name = "Description")
     private String Description;
+
+    public WeChatVideoMessageReplyDTO(WeChatBasicDTO weChatBasicDTO) {
+        super(weChatBasicDTO);
+        super.setMsgType(WeChatMessageType.VIDEO);
+    }
+
+    public WeChatVideoMessageReplyDTO() {
+        super.setMsgType(WeChatMessageType.VIDEO);
+    }
 }

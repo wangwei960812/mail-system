@@ -1,5 +1,7 @@
 package com.ww.mail.model.dto.res;
 
+import com.ww.mail.constant.WeChatMessageType;
+import com.ww.mail.model.dto.req.WeChatBasicDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WeChatMusicMessageReplyDTO extends WeChatMessageBasicReplyDTO{
@@ -32,4 +33,13 @@ public class WeChatMusicMessageReplyDTO extends WeChatMessageBasicReplyDTO{
     private String HQMusicUrl;
     @XmlElement(name = "ThumbMediaId")
     private String ThumbMediaId;
+
+    public WeChatMusicMessageReplyDTO(WeChatBasicDTO weChatBasicDTO) {
+        super(weChatBasicDTO);
+        super.setMsgType(WeChatMessageType.MUSIC);
+    }
+
+    public WeChatMusicMessageReplyDTO() {
+        super.setMsgType(WeChatMessageType.MUSIC);
+    }
 }

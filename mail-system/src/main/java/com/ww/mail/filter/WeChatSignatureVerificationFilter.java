@@ -45,16 +45,12 @@ public class WeChatSignatureVerificationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         boolean checked = checkSignature(httpServletRequest);
         if (checked) {
-            try {
-                if ("GET".equalsIgnoreCase(httpServletRequest.getMethod()) && new URI("/").equals(httpServletRequest.getRequestURI())) {
-                    httpServletResponse.getWriter().write(httpServletRequest.getParameter(ECHOSTR));
-                    logger.info("绑定成功");
-                } else {
-                    logger.info("验签成功");
-                    filterChain.doFilter(httpServletRequest, httpServletResponse);
-                }
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
+            if ("GET".equalsIgnoreCase(httpServletRequest.getMethod()) && "/".equals(httpServletRequest.getRequestURI())) {
+                httpServletResponse.getWriter().write(httpServletRequest.getParameter(ECHOSTR));
+                logger.info("绑定成功");
+            } else {
+                logger.info("验签成功");
+                filterChain.doFilter(httpServletRequest, httpServletResponse);
             }
         } else {
             logger.info("验签失败");
@@ -71,10 +67,10 @@ public class WeChatSignatureVerificationFilter extends OncePerRequestFilter {
         for (String s : arr) {
             str.append(s);
         }
-        log.info("sha1散列明文：{}",str.toString());
+        log.info("sha1散列明文：{}", str.toString());
         String sha1Str = null;
         try {
-            sha1Str = SHA1.getSHA1(token,timestamp,nonce,"");
+            sha1Str = SHA1.getSHA1(token, timestamp, nonce, "");
         } catch (AesException e) {
             e.printStackTrace();
         }

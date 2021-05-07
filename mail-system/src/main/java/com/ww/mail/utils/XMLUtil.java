@@ -115,9 +115,8 @@ public class XMLUtil {
 
     /**
      * Document转换为字符串
-     *
-     * @param xmlFilePath XML文件路径
-     * @return xmlStr 字符串
+     * @param doc Document
+     * @return 字符串
      * @throws Exception
      */
     public static String doc2String(Document doc) throws Exception {
