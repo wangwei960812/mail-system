@@ -16,7 +16,7 @@
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/spring_cloud?serverTimezone=UTC"
+                        connectionURL="jdbc:mysql://192.168.43.200:3306/spring_cloud?serverTimezone=UTC"
                         userId="root"
                         password="root">
 
