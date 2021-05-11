@@ -19,10 +19,12 @@ public class WeChatProperties {
 
     private String encodingAESKey;
 
-    private String assessTokenIp;
-
     private String appid;
 
     private String appsecret;
+
+    private String assessTokenIp;
+
+    private String sendTemplateMsgIp;
 
 }

@@ -2,9 +2,7 @@ package com.ww.mail.controller;
 
 import com.ww.mail.component.SpringUtils;
 import com.ww.mail.constant.WeChatMessageType;
-import com.ww.mail.model.dto.req.WeChatImageMessageDTO;
-import com.ww.mail.model.dto.req.WeChatMessageBasicDTO;
-import com.ww.mail.model.dto.req.WeChatTextMessageDTO;
+import com.ww.mail.service.DispatchService;
 import com.ww.mail.service.WeChatConvert;
 import com.ww.mail.service.WeChatMessageService;
 import com.ww.mail.utils.XMLUtil;
@@ -40,21 +38,22 @@ public class WeChatDispatchController {
             String event = document.getRootElement().getChildText("Event");
             if (event.contains("_")) {
                 String[] worlds = event.split("_");
-                StringBuffer buffer = new StringBuffer();
+                StringBuilder builder = new StringBuilder();
                 for (int i = 1; i < worlds.length; i++) {
-                    buffer.append(worlds[i].substring(0, 1).toUpperCase());
-                    buffer.append(worlds[i].substring(1));
+                    builder.append(worlds[i].substring(0, 1).toUpperCase());
+                    builder.append(worlds[i].substring(1));
                 }
-                event = buffer.toString();
+                event = builder.toString();
             }
             beanName = event + "Event" + "ServiceImpl";
         } else {
-            beanName = type + "ServiceImpl";
+            beanName = type + "DispatchServiceImpl";
         }
 
         try {
-            weChatMessageService = SpringUtils.getBean(beanName, WeChatMessageService.class);
             weChatConvert = SpringUtils.getBean(beanName, WeChatConvert.class);
+            DispatchService dispatchService = SpringUtils.getBean(beanName, DispatchService.class);
+            weChatMessageService = dispatchService.dispatch(weChatConvert.stringToDto(XMLUtil.doc2String(document)));
             if (weChatMessageService != null) {
                 return weChatMessageService.reply(weChatConvert.stringToDto(XMLUtil.doc2String(document)), null);
             }

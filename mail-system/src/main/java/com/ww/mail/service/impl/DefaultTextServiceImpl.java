@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class TextServiceImpl implements WeChatMessageService<WeChatTextMessageDTO,String>, WeChatConvert {
+public class DefaultTextServiceImpl implements WeChatMessageService<WeChatTextMessageDTO,String> {
     @Override
     public WeChatMessageBasicReplyDTO reply(WeChatTextMessageDTO weChatTextMessageDTO,String text) {
         log.info("{}", JSONObject.toJSONString(weChatTextMessageDTO));
@@ -31,9 +31,4 @@ public class TextServiceImpl implements WeChatMessageService<WeChatTextMessageDT
         return weChatTextMessageReplyDTO;
     }
 
-
-    @Override
-    public WeChatBasicDTO stringToDto(String data) {
-        return XMLUtil.convertXmlStrToObject(WeChatTextMessageDTO.class, data);
-    }
 }
