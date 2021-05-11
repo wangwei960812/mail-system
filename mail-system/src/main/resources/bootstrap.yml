@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: mail-sys
+  cloud:
+    nacos:
+      config:
+        server-addr: http://101.201.124.79:8848/
+        file-extension: yaml
+        group: local
+      discovery:
+        enabled: false
+  mail:
+    host: smtp.163.com
+    username: 15216619538@163.com
+    password: 125263ww
+    default-encoding: UTF-8
+  datasource:
+    druid:
+      url: jdbc:mysql://192.168.8.106:3306/spring_cloud?serverTimezone=GMT%2B8&useUnicode=true&characterEncodeing=utf-8&useSSL=false
+      username: root
+      password: root
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  level:
+    root: debug
+
+server:
+  port: 8080

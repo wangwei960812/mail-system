@@ -43,17 +43,21 @@ public class WeChatSignatureVerificationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        boolean checked = checkSignature(httpServletRequest);
-        if (checked) {
-            if ("GET".equalsIgnoreCase(httpServletRequest.getMethod()) && "/".equals(httpServletRequest.getRequestURI())) {
-                httpServletResponse.getWriter().write(httpServletRequest.getParameter(ECHOSTR));
-                logger.info("绑定成功");
+        if ("/".equals(httpServletRequest.getRequestURI())) {
+            boolean checked = checkSignature(httpServletRequest);
+            if (checked) {
+                if ("GET".equalsIgnoreCase(httpServletRequest.getMethod())) {
+                    httpServletResponse.getWriter().write(httpServletRequest.getParameter(ECHOSTR));
+                    logger.info("绑定成功");
+                } else {
+                    logger.info("验签成功");
+                    filterChain.doFilter(httpServletRequest, httpServletResponse);
+                }
             } else {
-                logger.info("验签成功");
-                filterChain.doFilter(httpServletRequest, httpServletResponse);
+                logger.info("验签失败");
             }
         } else {
-            logger.info("验签失败");
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
         }
     }
 
